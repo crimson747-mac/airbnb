@@ -44,6 +44,7 @@ class RoomAdmin(admin.ModelAdmin):
         "check_in",
         "check_out",
         "instant_book",
+        "count_amenities",
     ]
 
     list_filter = [
@@ -60,6 +61,13 @@ class RoomAdmin(admin.ModelAdmin):
     search_fields = ["^city", "^host__username"]
 
     filter_horizontal = ["amenities", "facilities", "house_rules"]
+
+    # 두 번째 인자인 obj는 현재 row(admin 패널에서의 행)을 의미한다.
+    def count_amenities(self, obj):
+        print(obj.amenities.all())
+        return "potato"
+
+    count_amenities.short_description = "hello"
 
 
 @admin.register(models.Photo)
